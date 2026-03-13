@@ -4,35 +4,35 @@
 ![Sockets](https://img.shields.io/badge/Network-Sockets-00599C?style=for-the-badge)
 ![Multithreading](https://img.shields.io/badge/Concurrency-Multithreading-121011?style=for-the-badge)
 
-> A backend Java project demonstrating TCP/IP socket programming, multi-threading, and remote file management.
+> A backend Java project featuring a suite of three TCP/IP server applications, demonstrating progression in socket programming, multi-threading, and remote file management.
 
 ---
 
 ## 🎯 Project Overview
 
-This project focuses on building robust client-server architectures using Java. The main objective is to handle multiple client connections simultaneously without blocking the main server thread, ensuring a smooth and responsive network application. The project culminates in a fully functional remote file server with state-based authentication.
+This project focuses on building robust client-server architectures using Java. The main objective is to handle multiple client connections simultaneously without blocking the main server thread, ensuring a smooth and responsive network application. The repository includes three distinct server programs, culminating in a fully functional remote file server with state-based authentication.
 
 ## 🛠️ Programs Included
 
-This repository contains two distinct server implementations, showcasing a progression in complexity:
+The repository is structured around three server implementations, each adding a layer of complexity:
 
-### 1. The Concurrent Base Server
-* **Multithreading:** Upgrades a standard sequential server to a concurrent architecture. 
-* **Thread-per-client:** It uses Java's `Thread` class and `Runnable` interfaces to spawn a new thread for every incoming connection, allowing multiple clients to interact with the server simultaneously.
-* **Core Networking:** Deep utilization of `ServerSocket` and `Socket` classes for reliable TCP communication.
+### 1. Basic Concurrent Server
+* **Foundation:** Upgrades a standard sequential server to a concurrent architecture.
+* **Thread-per-client:** Uses Java's `Thread` class and `Runnable` interfaces to spawn a new thread for every incoming connection, allowing multiple clients to interact with the server simultaneously without bottlenecks.
 
-### 2. The Authenticated Remote File Server
-* **Authentication System:** The server requires a valid username and password session before granting access to its features.
-* **State Machine Logic:** Operates on a strict state diagram (e.g., *Waiting for Connection -> Authenticating -> Ready for Commands -> Disconnected*) to ensure secure and logical request handling.
-* **Remote Commands:** Once a client is authenticated, they can interact with the server's filesystem:
+### 2. Advanced Command Server
+* **Complex I/O:** Builds upon the basic concurrent model to handle more complex data processing and continuous client-server message exchange.
+* **Resource Management:** Ensures sockets and streams are properly managed and closed across multiple active threads to prevent resource leaks.
+
+### 3. Authenticated Remote File Server
+* **Authentication System:** The flagship implementation. The server requires a valid username and password session (e.g., `javier` / `secreta`) before granting access to its features.
+* **State Machine Logic:** Operates on a strict state diagram (*Waiting for Connection -> Authenticating -> Ready for Commands -> Disconnected*) to ensure secure request handling.
+* **Remote File System Access:** Once authenticated, clients can interact with the server's filesystem to:
   * **List:** View the contents of the server's current directory.
   * **Read:** Request and display the contents of a specific file over the network.
-  * **Exit:** Gracefully terminate the session and close the socket.
-* **I/O Streams:** Extensive use of `DataInputStream`, `DataOutputStream`, `BufferedReader`, and `PrintWriter` for seamless data transmission.
+  * **Exit:** Gracefully terminate the session.
 
 ## ⚙️ How to Compile & Run
-
-*Note: You must start the Server application first before launching any Client instances.*
 
 1.  Clone the repository:
     ```bash
@@ -40,17 +40,17 @@ This repository contains two distinct server implementations, showcasing a progr
     cd Java-Concurrent-Servers
     ```
 
-2.  Compile the `.java` files:
+2.  Compile the `.java` files (replace `program3` with the actual folder name):
     ```bash
-    javac src/*.java
+    javac src/program3/*.java
     ```
 
 3.  **Start the Server** in one terminal:
     ```bash
-    java -cp src ServerMain
+    java -cp src program3.ServerMain
     ```
 
 4.  **Start one or more Clients** in separate terminals to test concurrency:
     ```bash
-    java -cp src ClientMain
+    java -cp src program3.ClientMain
     ```
